@@ -5,6 +5,7 @@ import APIFunction as APIsetting
 class Frames:
 
      def WindowAPISetting(APIsettingWindow):
+          # bug: ウィンドウが複数表示可能
           if APIsettingWindow == None or not APIsettingWindow.winfo_exists():
                APIsettingWindow = tk.Toplevel()
                APIsettingWindow.geometry("550x120")
