@@ -4,6 +4,8 @@ import tkinter as tk
 import mainFrames as window
 import settingFrames as setting
 
+import const
+
 #global
 root = None
 APIsettingWindow = None
@@ -14,7 +16,7 @@ def main():
      root = tk.Tk()
      window.rootFrame(root)
 
-     if not os.path.isfile("./api.ini"):
+     if not os.path.isfile(const.value.APIPath):
           setting.Frames.WindowAPISetting(APIsettingWindow)
 
      root.mainloop()

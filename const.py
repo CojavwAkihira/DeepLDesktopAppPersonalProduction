@@ -3,6 +3,8 @@ import string
 
 class value(constantFunc.Constant):
 
+     APIPath = "./api.ini"
+
      rootWindowTitle: string = "(Experiment by Akimoch) DeepL Translate Desktop version FreeAPI version"
      rootWindowSize: string = "1024x768"
      rootBeforeTransLabel: string = "翻訳前の言語："
