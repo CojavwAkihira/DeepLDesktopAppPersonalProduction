@@ -1,13 +1,23 @@
 import tkinter as tk
 import tkinter.ttk as ttk
 import tkinter.scrolledtext as scroll
+import os
+
 from main import APIsettingWindow
+
 import settingFrames as setting
 import const
 import mainFramesFunc as func
 
 class rootFrame(tk.Frame):
+
+     APIKey_main = ""
+
+     if os.path.isfile(const.value.APIPath):
+          APIKey_main = func.APIFunc.FileLoad()
+
      def __init__(self, master):
+          global APIKey_main
           super().__init__(master)
           self.pack(fill = tk.BOTH, pady=5)
           master.resizable(width=False, height=False)
@@ -38,7 +48,7 @@ class rootFrame(tk.Frame):
           #rootAfterTransLabel.place(x=575,y=10)
 
           rootAfterTransLangSelBox = ttk.Combobox(topFrame, height=12, width=24, justify="left", textvariable=afterLang, values=const.value.afterLangSelList)
-          rootAfterTransLangSelBox.set(const.value.beforeLangSelList[0])
+          rootAfterTransLangSelBox.set(const.value.afterLangSelList[0])
           #rootAfterTransLangSelBox.place(x=665,y=10)
 
           rootBeforeTransLabel.pack(side=tk.LEFT, padx=(13,0), pady=0)
@@ -55,7 +65,7 @@ class rootFrame(tk.Frame):
           #rootBeforeTxtBox.place(x=20,y=40)
           rootBeforeTxtBox.pack(side=tk.LEFT, padx=15, pady=0)
 
-          translateButton = ttk.Button(centerPain, text=const.value.translateButtonLabel, command=lambda: print(func.mainFramesFunc.characterCountCheck()))
+          translateButton = ttk.Button(centerPain, text=const.value.translateButtonLabel, command=lambda: self.pushTranslateButton(beforeLang, rootBeforeTxtBox, afterLang, rootAfterTxtBox))
           #translateButton.place(x=465,y=320)
           translateButton.pack(side=tk.LEFT, padx=5, pady=0)
 
@@ -72,3 +82,10 @@ class rootFrame(tk.Frame):
           APIKeyButton.pack(side=tk.RIGHT, padx=13)
 
           APIKeyButtonFrame.pack(fill=tk.X)
+
+     def pushTranslateButton(self, beforeLang, rootBeforeTxtBox, afterLang, rootAfterTxtBox):
+          print(self.APIKey_main)
+          rootAfterTxtBox.delete("1.0", tk.END)
+          rootAfterTxtBox.insert(tk.END, func.APIFunc.Translate(self.APIKey_main, "JA", rootBeforeTxtBox.get("1.0", tk.END) , "EN"))
+
+

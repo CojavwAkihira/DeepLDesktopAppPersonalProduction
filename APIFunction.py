@@ -1,15 +1,39 @@
-import tkinter as tk
-import const
+import requests
 
-#stub
+import const as const
+
 class function:
-     def register(APIsettingWindow, APIKey):
+
+     APIKey = ""
+
+     def loadAPIKey():
           try:
-               with open(const.value.APIPath, mode='x') as f:
-                    f.write(APIKey.get())
+               with open(const.value.APIPath, mode='r') as f:
+                    APIKey = f.read()
 
-          except FileExistsError:
-               with open(const.value.APIPath, mode='w') as f:
-                    f.write(APIKey.get())
+          except FileNotFoundError:
+               return False
 
-          APIsettingWindow.destroy()
+          if APIKey == "":
+               return False
+          else:
+               return APIKey
+
+     # API
+     def apiCheck():
+          global APIKey
+          APIKey = function.loadAPIKey()
+          r = function.characterCountCheck()
+          if r.status_code == 200:
+               return True
+          else:
+               return False
+
+     def characterCountCheck():
+          global APIKey
+          r = requests.post('https://api-free.deepl.com/v2/usage', data={'auth_key': APIKey})
+          print(r.json())
+          return r
+
+     def Translate():
+          pass

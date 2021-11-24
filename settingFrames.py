@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-import APIFunction as APIsetting
+
+import settingFramesFunc as func
 
 class Frames:
 
@@ -20,5 +21,7 @@ class Frames:
                APIKeyTxtBox = tk.Entry(APIsettingWindow, width=50, textvariable=APIKey)
                APIKeyTxtBox.place(x=120,y=25)
 
-               APIKeyButton = ttk.Button(APIsettingWindow, text="OK", command=lambda: APIsetting.function.register(APIsettingWindow, APIKey))
+               APIKeyButton = ttk.Button(APIsettingWindow, text="OK", command=lambda: func.function.register(APIsettingWindow, APIKey))
                APIKeyButton.place(x=460,y=80)
+          else:
+               pass

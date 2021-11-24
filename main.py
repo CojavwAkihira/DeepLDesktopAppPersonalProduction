@@ -4,7 +4,7 @@ import tkinter as tk
 import mainFrames as window
 import settingFrames as setting
 
-import const
+import const as const
 
 #global
 root = None
@@ -12,6 +12,7 @@ APIsettingWindow = None
 
 def main():
      global root
+     global APIsettingWindow
 
      root = tk.Tk()
      window.rootFrame(root)
